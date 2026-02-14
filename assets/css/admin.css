@@ -1,10 +1,15 @@
-/* Cleaning Price Calculator - Admin Styles */
+/* ============================================
+   Cleaning Price Calculator - Professional Admin Styles
+   ============================================ */
 
+/* Base Admin Styles */
 .cpc-admin-wrap {
     margin: 20px 20px 0 0;
 }
 
-/* Dashboard Stats */
+/* ============================================
+   Dashboard Stats
+   ============================================ */
 .cpc-dashboard-stats {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
@@ -13,29 +18,30 @@
 }
 
 .cpc-stat-box {
-    background: #ffffff;
-    border: 1px solid #e5e7eb;
-    border-radius: 8px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 12px;
     padding: 25px;
     display: flex;
     align-items: center;
     gap: 20px;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .cpc-stat-box:hover {
-    box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
-    transform: translateY(-2px);
+    transform: translateY(-5px);
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
 }
 
 .cpc-stat-icon {
     width: 60px;
     height: 60px;
-    background: linear-gradient(135deg, #2563eb 0%, #1d4ed8 100%);
+    background: rgba(255, 255, 255, 0.2);
     border-radius: 12px;
     display: flex;
     align-items: center;
     justify-content: center;
+    flex-shrink: 0;
 }
 
 .cpc-stat-icon .dashicons {
@@ -45,16 +51,20 @@
     height: 30px;
 }
 
+.cpc-stat-content {
+    flex: 1;
+}
+
 .cpc-stat-content h3 {
     margin: 0 0 5px 0;
     font-size: 32px;
     font-weight: 700;
-    color: #1f2937;
+    color: white;
 }
 
 .cpc-stat-content p {
     margin: 0;
-    color: #6b7280;
+    color: rgba(255, 255, 255, 0.9);
     font-size: 14px;
 }
 
@@ -107,7 +117,680 @@
     margin: 15px 0;
 }
 
-/* Two Column Layout */
+/* ============================================
+   Quote Detail Page - Professional Design
+   ============================================ */
+
+.cpc-quote-detail-wrap {
+    background: #f9fafb;
+    margin: 0 20px 0 0;
+    padding: 0;
+}
+
+/* Header */
+.cpc-detail-header {
+    background: white;
+    border-bottom: 1px solid #e5e7eb;
+    padding: 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 20px;
+    margin-bottom: 30px;
+}
+
+.cpc-detail-header-left {
+    flex: 1;
+}
+
+.cpc-detail-title-group {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    margin-bottom: 10px;
+}
+
+.cpc-detail-title {
+    margin: 0;
+    font-size: 28px;
+    font-weight: 700;
+    color: #1f2937;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.cpc-detail-id {
+    color: #6b7280;
+    font-weight: 400;
+}
+
+.cpc-detail-date {
+    margin: 0;
+    color: #6b7280;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.cpc-detail-date .dashicons {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+}
+
+.cpc-detail-header-right {
+    display: flex;
+    gap: 10px;
+}
+
+/* Container Layout */
+.cpc-detail-container {
+    display: grid;
+    grid-template-columns: 1fr 380px;
+    gap: 30px;
+    padding: 0 30px 30px;
+}
+
+/* Cards */
+.cpc-detail-card {
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 12px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+    margin-bottom: 20px;
+    overflow: hidden;
+}
+
+.cpc-card-header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    padding: 20px 25px;
+    border-bottom: none;
+}
+
+.cpc-card-header h2 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: white;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.cpc-card-header .dashicons {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+}
+
+.cpc-card-body {
+    padding: 25px;
+}
+
+/* Customer Information */
+.cpc-info-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+}
+
+.cpc-info-item {
+    display: flex;
+    gap: 15px;
+    padding: 15px;
+    background: #f9fafb;
+    border-radius: 8px;
+    border: 1px solid #e5e7eb;
+}
+
+.cpc-info-item-full {
+    grid-column: 1 / -1;
+}
+
+.cpc-info-icon {
+    width: 40px;
+    height: 40px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+.cpc-info-icon .dashicons {
+    color: white;
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+}
+
+.cpc-info-content {
+    flex: 1;
+}
+
+.cpc-info-content label {
+    display: block;
+    font-size: 11px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #6b7280;
+    margin-bottom: 5px;
+}
+
+.cpc-info-content p {
+    margin: 0;
+    font-size: 15px;
+    color: #1f2937;
+    font-weight: 500;
+}
+
+.cpc-info-content a {
+    color: #2563eb;
+    text-decoration: none;
+}
+
+.cpc-info-content a:hover {
+    text-decoration: underline;
+}
+
+/* Customer Message */
+.cpc-customer-message {
+    margin-top: 25px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.cpc-message-header {
+    background: #eff6ff;
+    padding: 12px 15px;
+    font-weight: 600;
+    color: #1e40af;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    border-bottom: 1px solid #bfdbfe;
+}
+
+.cpc-message-header .dashicons {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+}
+
+.cpc-message-body {
+    padding: 15px;
+    background: white;
+    color: #374151;
+    line-height: 1.6;
+}
+
+/* Items Table */
+.cpc-items-table-wrapper {
+    overflow-x: auto;
+    margin: -5px;
+    padding: 5px;
+}
+
+.cpc-items-table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 14px;
+}
+
+.cpc-items-table thead {
+    background: #f9fafb;
+}
+
+.cpc-items-table th {
+    padding: 12px 15px;
+    text-align: left;
+    font-weight: 600;
+    color: #374151;
+    border-bottom: 2px solid #e5e7eb;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.cpc-items-table tbody tr {
+    border-bottom: 1px solid #f3f4f6;
+    transition: background 0.2s;
+}
+
+.cpc-items-table tbody tr:hover {
+    background: #f9fafb;
+}
+
+.cpc-items-table td {
+    padding: 15px;
+    color: #1f2937;
+}
+
+.cpc-items-table .col-number {
+    width: 50px;
+    text-align: center;
+    font-weight: 600;
+    color: #6b7280;
+}
+
+.cpc-items-table .col-name {
+    min-width: 180px;
+}
+
+.cpc-items-table .col-count {
+    width: 80px;
+    text-align: center;
+}
+
+.cpc-items-table .col-area,
+.cpc-items-table .col-price {
+    width: 100px;
+    text-align: center;
+}
+
+.cpc-items-table .col-calc {
+    width: 180px;
+    text-align: center;
+}
+
+.cpc-items-table .col-subtotal {
+    width: 120px;
+    text-align: right;
+}
+
+.cpc-items-table code {
+    background: #f3f4f6;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    color: #6b7280;
+    font-family: 'Courier New', monospace;
+}
+
+.count-badge {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    min-width: 32px;
+    height: 32px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 14px;
+    padding: 0 8px;
+}
+
+.cpc-items-table tfoot {
+    background: #f9fafb;
+}
+
+.cpc-items-table .total-row td {
+    padding: 20px 15px;
+    border-top: 2px solid #e5e7eb;
+}
+
+.cpc-items-table .total-label {
+    text-align: right;
+    font-weight: 700;
+    font-size: 16px;
+    color: #1f2937;
+}
+
+.cpc-items-table .total-amount {
+    text-align: right;
+    font-weight: 800;
+    font-size: 20px;
+    color: #2563eb;
+}
+
+/* Empty State */
+.cpc-empty-state {
+    text-align: center;
+    padding: 60px 20px;
+    color: #6b7280;
+}
+
+.cpc-empty-state .dashicons {
+    font-size: 64px;
+    width: 64px;
+    height: 64px;
+    color: #f59e0b;
+    margin-bottom: 15px;
+}
+
+.cpc-empty-state p {
+    margin: 0;
+    font-size: 16px;
+}
+
+/* Sidebar Cards */
+.cpc-detail-sidebar .cpc-detail-card {
+    margin-bottom: 20px;
+}
+
+/* Status Form */
+.cpc-status-form {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.cpc-form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.cpc-form-group label {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: #6b7280;
+}
+
+.cpc-select {
+    padding: 10px 12px;
+    border: 1px solid #e5e7eb;
+    border-radius: 6px;
+    font-size: 14px;
+    background: white;
+    color: #1f2937;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.cpc-select:focus {
+    outline: none;
+    border-color: #667eea;
+    box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+}
+
+.button-block {
+    width: 100%;
+    justify-content: center;
+}
+
+/* Action Buttons */
+.cpc-action-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.cpc-action-btn {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 12px 15px;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    background: white;
+    color: #374151;
+    text-decoration: none;
+    transition: all 0.2s;
+    font-weight: 500;
+}
+
+.cpc-action-btn:hover {
+    background: #f9fafb;
+    border-color: #d1d5db;
+    transform: translateX(5px);
+}
+
+.cpc-action-btn .dashicons {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+}
+
+.cpc-action-email:hover {
+    border-color: #3b82f6;
+    color: #3b82f6;
+}
+
+.cpc-action-phone:hover {
+    border-color: #10b981;
+    color: #10b981;
+}
+
+.cpc-action-delete:hover {
+    border-color: #ef4444;
+    color: #ef4444;
+    background: #fef2f2;
+}
+
+/* Summary Card */
+.cpc-summary-item {
+    display: flex;
+    justify-content: space-between;
+    padding: 12px 0;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.cpc-summary-item:last-child {
+    border-bottom: none;
+}
+
+.cpc-summary-item .label {
+    font-size: 13px;
+    color: #6b7280;
+    font-weight: 500;
+}
+
+.cpc-summary-item .value {
+    font-size: 14px;
+    color: #1f2937;
+    font-weight: 600;
+}
+
+.cpc-summary-item code {
+    background: #f3f4f6;
+    padding: 4px 8px;
+    border-radius: 4px;
+    font-size: 12px;
+    color: #6b7280;
+}
+
+.cpc-summary-total {
+    display: flex;
+    justify-content: space-between;
+    padding: 15px 0 0;
+    margin-top: 10px;
+    border-top: 2px solid #e5e7eb;
+}
+
+.cpc-summary-total .label {
+    font-size: 14px;
+    color: #374151;
+    font-weight: 700;
+}
+
+.cpc-summary-total .value {
+    font-size: 20px;
+    color: #2563eb;
+    font-weight: 800;
+}
+
+/* Status Badges */
+.cpc-status-badge {
+    display: inline-flex;
+    align-items: center;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.cpc-status-pending {
+    background: #fef3c7;
+    color: #92400e;
+}
+
+.cpc-status-processing {
+    background: #dbeafe;
+    color: #1e40af;
+}
+
+.cpc-status-completed {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.cpc-status-cancelled {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+.cpc-status-active {
+    background: #d1fae5;
+    color: #065f46;
+}
+
+.cpc-status-inactive {
+    background: #fee2e2;
+    color: #991b1b;
+}
+
+/* ============================================
+   Print Styles
+   ============================================ */
+@media print {
+    .no-print,
+    .cpc-detail-header-right,
+    .cpc-status-card,
+    .cpc-actions-card,
+    #wpadminbar,
+    #adminmenuback,
+    #adminmenuwrap,
+    .update-nag,
+    .notice {
+        display: none !important;
+    }
+    
+    .cpc-quote-detail-wrap {
+        background: white;
+        margin: 0;
+        padding: 20px;
+    }
+    
+    .cpc-detail-header {
+        border: none;
+        padding: 0 0 20px;
+        margin-bottom: 20px;
+        border-bottom: 2px solid #000;
+    }
+    
+    .cpc-detail-container {
+        display: block;
+    }
+    
+    .cpc-detail-main,
+    .cpc-detail-sidebar {
+        width: 100%;
+    }
+    
+    .cpc-detail-card {
+        page-break-inside: avoid;
+        box-shadow: none;
+        border: 1px solid #ddd;
+        margin-bottom: 20px;
+    }
+    
+    .cpc-card-header {
+        background: #f5f5f5 !important;
+        color: #000 !important;
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+    
+    .cpc-card-header h2 {
+        color: #000 !important;
+    }
+    
+    .cpc-items-table {
+        font-size: 11px;
+    }
+    
+    .cpc-items-table th,
+    .cpc-items-table td {
+        padding: 8px 10px;
+    }
+    
+    .col-calc {
+        display: none !important;
+    }
+}
+
+/* ============================================
+   Responsive Design
+   ============================================ */
+@media (max-width: 1280px) {
+    .cpc-detail-container {
+        grid-template-columns: 1fr 320px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .cpc-detail-container {
+        grid-template-columns: 1fr;
+    }
+    
+    .cpc-detail-sidebar {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 20px;
+    }
+}
+
+@media (max-width: 782px) {
+    .cpc-detail-header {
+        flex-direction: column;
+    }
+    
+    .cpc-detail-header-right {
+        width: 100%;
+        flex-wrap: wrap;
+    }
+    
+    .cpc-detail-container {
+        padding: 0 15px 15px;
+    }
+    
+    .cpc-info-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .cpc-detail-sidebar {
+        grid-template-columns: 1fr;
+    }
+    
+    .cpc-items-table-wrapper {
+        overflow-x: auto;
+    }
+    
+    .cpc-items-table {
+        min-width: 800px;
+    }
+}
+
+@media (max-width: 600px) {
+    .cpc-dashboard-stats {
+        grid-template-columns: 1fr;
+    }
+}
+
+/* ============================================
+   Two Column Layout (Room Types, etc.)
+   ============================================ */
 .cpc-two-column-layout {
     display: grid;
     grid-template-columns: 1fr 1.5fr;
@@ -162,57 +845,13 @@
     margin-top: 25px;
 }
 
-/* Status Badge */
-.cpc-status {
-    display: inline-block;
-    padding: 4px 12px;
-    border-radius: 12px;
-    font-size: 12px;
-    font-weight: 600;
-    text-transform: uppercase;
-}
-
-.cpc-status-active {
-    background: #d1fae5;
-    color: #065f46;
-}
-
-.cpc-status-inactive {
-    background: #fee2e2;
-    color: #991b1b;
-}
-
-.cpc-status-pending {
-    background: #fef3c7;
-    color: #92400e;
-}
-
 /* Settings Tabs */
-.cpc-settings-tabs {
-    margin-bottom: 25px;
-    border-bottom: 1px solid #e5e7eb;
-}
-
-.cpc-settings-tabs .nav-tab {
-    margin-bottom: -1px;
-    border-bottom: 2px solid transparent;
-}
-
-.cpc-settings-tabs .nav-tab.nav-tab-active {
-    border-bottom-color: #2563eb;
-}
-
 .cpc-settings-section {
     background: #ffffff;
     border: 1px solid #e5e7eb;
     border-radius: 8px;
     padding: 25px;
     margin-bottom: 25px;
-    display: none;
-}
-
-.cpc-settings-section:first-of-type {
-    display: block;
 }
 
 .cpc-settings-section h3 {
@@ -222,99 +861,6 @@
     color: #1f2937;
     border-bottom: 1px solid #e5e7eb;
     padding-bottom: 10px;
-}
-
-.cpc-settings-row {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    margin-bottom: 20px;
-}
-
-/* Color Picker */
-.cpc-color-picker-wrapper {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.cpc-color-preview {
-    width: 40px;
-    height: 40px;
-    border-radius: 6px;
-    border: 1px solid #e5e7eb;
-}
-
-/* Quote Details */
-.cpc-quote-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 25px;
-}
-
-.cpc-quote-meta {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-    margin-bottom: 25px;
-}
-
-.cpc-meta-item {
-    padding: 15px;
-    background: #f9fafb;
-    border-radius: 6px;
-}
-
-.cpc-meta-label {
-    display: block;
-    font-size: 12px;
-    color: #6b7280;
-    text-transform: uppercase;
-    margin-bottom: 5px;
-    font-weight: 600;
-}
-
-.cpc-meta-value {
-    font-size: 16px;
-    color: #1f2937;
-    font-weight: 600;
-}
-
-.cpc-quote-items-table {
-    margin: 25px 0;
-}
-
-.cpc-quote-total {
-    text-align: right;
-    font-size: 24px;
-    font-weight: 700;
-    color: #2563eb;
-    padding: 20px;
-    background: #eff6ff;
-    border-radius: 8px;
-    margin-top: 20px;
-}
-
-/* Responsive */
-@media (max-width: 1024px) {
-    .cpc-two-column-layout {
-        grid-template-columns: 1fr;
-    }
-    
-    .cpc-settings-row {
-        grid-template-columns: 1fr;
-    }
-}
-
-@media (max-width: 768px) {
-    .cpc-dashboard-stats {
-        grid-template-columns: 1fr;
-    }
-    
-    .cpc-quote-meta {
-        grid-template-columns: 1fr;
-    }
 }
 
 /* Notices */

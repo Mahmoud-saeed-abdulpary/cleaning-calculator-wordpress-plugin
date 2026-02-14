@@ -52,6 +52,18 @@ class CPC_Admin_Menu {
             'cpc-settings',
             array($this, 'display_settings')
         );
+
+        // Debug submenu (only in development)
+        // if (defined('WP_DEBUG') && WP_DEBUG) {
+        //     add_submenu_page(
+        //         'cleaning-price-calculator',
+        //         __('Debug', 'cleaning-price-calculator'),
+        //         __('Debug', 'cleaning-price-calculator'),
+        //         'manage_options',
+        //         'cpc-debug',
+        //         array($this, 'display_debug')
+        //     );
+        // }
     }
     
     /**
@@ -79,4 +91,11 @@ class CPC_Admin_Menu {
     public function display_settings() {
         require_once CPC_PLUGIN_DIR . 'admin/views/settings.php';
     }
+
+    /**
+     * Display debug page
+     */
+    // public function display_debug() {
+    //     require_once CPC_PLUGIN_DIR . 'admin/views/debug-quote.php';
+    // }
 }

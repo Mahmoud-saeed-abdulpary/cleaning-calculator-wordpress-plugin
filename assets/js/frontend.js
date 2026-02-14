@@ -49,6 +49,13 @@
             updateRoomCalculation(roomIndex);
         });
 
+        // Room count change
+        $(document).on('input', '.cpc-room-count', function() {
+            const roomItem = $(this).closest('.cpc-accordion-item');
+            const roomIndex = parseInt(roomItem.data('room-index'));
+            updateRoomCalculation(roomIndex);
+        });
+
         // Area change
         $(document).on('input', '.cpc-room-area', function() {
             const roomItem = $(this).closest('.cpc-accordion-item');
@@ -106,6 +113,7 @@
         rooms.push({
             index: roomCounter,
             room_name: '',
+            room_count: 1,
             area: 0,
             price_per_sqm: pricePerSqm,
             subtotal: 0
@@ -126,21 +134,28 @@
     function updateRoomCalculation(roomIndex) {
         const roomItem = $(`.cpc-accordion-item[data-room-index="${roomIndex}"]`);
         const roomName = roomItem.find('.cpc-room-name').val().trim();
+        const roomCount = parseInt(roomItem.find('.cpc-room-count').val()) || 1;
         const area = parseFloat(roomItem.find('.cpc-room-area').val()) || 0;
-        const subtotal = area * pricePerSqm;
+        const subtotal = roomCount * area * pricePerSqm;
 
         // Update room data
         const roomData = rooms.find(room => room.index === roomIndex);
         if (roomData) {
             roomData.room_name = roomName;
+            roomData.room_count = roomCount;
             roomData.area = area;
             roomData.price_per_sqm = pricePerSqm;
             roomData.subtotal = subtotal;
         }
 
+        // Update calculation display
+        const calcFormula = `${roomCount} × ${area.toFixed(2)} m² × ${pricePerSqm.toFixed(2)} ${cpcFrontend.currency}/m²`;
+        roomItem.find('.cpc-calc-formula').text(calcFormula);
+
         // Update UI
         const displayName = roomName || 'Room';
-        roomItem.find('.cpc-room-title').text(`${displayName} #${roomIndex}`);
+        const roomTitle = roomCount > 1 ? `${displayName} (${roomCount}x)` : displayName;
+        roomItem.find('.cpc-room-title').text(`${roomTitle} #${roomIndex}`);
         roomItem.find('.cpc-subtotal-amount').text(subtotal.toFixed(2) + ' ' + cpcFrontend.currency);
 
         updateGrandTotal();
@@ -154,9 +169,13 @@
             if (room.subtotal > 0) {
                 grandTotal += room.subtotal;
                 const displayName = room.room_name || 'Room #' + room.index;
+                const roomInfo = room.room_count > 1 
+                    ? `${displayName} (${room.room_count} × ${room.area.toFixed(2)} m²)`
+                    : `${displayName} (${room.area.toFixed(2)} m²)`;
+                
                 totalsHtml.push(`
                     <div class="cpc-total-item">
-                        <span>${displayName} (${room.area.toFixed(2)} m²)</span>
+                        <span>${roomInfo}</span>
                         <span>${room.subtotal.toFixed(2)} ${cpcFrontend.currency}</span>
                     </div>
                 `);

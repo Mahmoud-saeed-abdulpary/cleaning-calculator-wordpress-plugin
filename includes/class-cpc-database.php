@@ -37,12 +37,13 @@ class CPC_Database {
             KEY created_at (created_at)
         ) $charset_collate;";
         
-        // Quote Items Table - UPDATED STRUCTURE
+        // Quote Items Table - UPDATED WITH room_count
         $table_quote_items = $wpdb->prefix . 'cpc_quote_items';
         $sql_quote_items = "CREATE TABLE $table_quote_items (
             id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
             quote_id bigint(20) unsigned NOT NULL,
             room_name varchar(255) NOT NULL,
+            room_count int(11) NOT NULL DEFAULT 1,
             area decimal(10,2) NOT NULL,
             price_per_sqm decimal(10,2) NOT NULL,
             subtotal decimal(10,2) NOT NULL,
@@ -57,6 +58,7 @@ class CPC_Database {
         
         // Check if we need to migrate old data
         self::maybe_migrate_room_type_column();
+        self::maybe_add_room_count_column();
     }
     
     /**
@@ -75,6 +77,23 @@ class CPC_Database {
             
             // Remove room_type_id if it exists
             $wpdb->query("ALTER TABLE $table DROP COLUMN IF EXISTS room_type_id");
+        }
+    }
+
+    /**
+     * Add room_count column if it doesn't exist
+     */
+    private static function maybe_add_room_count_column() {
+        global $wpdb;
+        $table = $wpdb->prefix . 'cpc_quote_items';
+        
+        // Check if room_count column exists
+        $column_exists = $wpdb->get_results("SHOW COLUMNS FROM $table LIKE 'room_count'");
+        
+        if (empty($column_exists)) {
+            // Add room_count column with default value of 1
+            $wpdb->query("ALTER TABLE $table ADD COLUMN room_count int(11) NOT NULL DEFAULT 1 AFTER room_name");
+            error_log('CPC: Added room_count column to quote_items table');
         }
     }
     
@@ -126,6 +145,7 @@ class CPC_Database {
             $item_data = array(
                 'quote_id' => $quote_id,
                 'room_name' => sanitize_text_field($room['room_name']),
+                'room_count' => intval($room['room_count']),
                 'area' => floatval($room['area']),
                 'price_per_sqm' => floatval($room['price_per_sqm']),
                 'subtotal' => floatval($room['subtotal']),
@@ -159,12 +179,18 @@ class CPC_Database {
             $id
         ));
         
-        if ($quote) {
-            $quote->items = $wpdb->get_results($wpdb->prepare(
-                "SELECT * FROM $items_table WHERE quote_id = %d ORDER BY id ASC",
-                $id
-            ));
+        if (!$quote) {
+            return null;
         }
+        
+        // Get items
+        $items = $wpdb->get_results($wpdb->prepare(
+            "SELECT * FROM $items_table WHERE quote_id = %d ORDER BY id ASC",
+            $id
+        ));
+        
+        // Ensure items is always an array
+        $quote->items = is_array($items) ? $items : array();
         
         return $quote;
     }

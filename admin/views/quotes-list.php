@@ -10,6 +10,27 @@ if (!defined('WPINC')) {
     die;
 }
 
+// Handle delete action
+if (isset($_GET['action']) && $_GET['action'] === 'delete' && isset($_GET['quote_id'])) {
+    $quote_id = intval($_GET['quote_id']);
+    check_admin_referer('cpc_delete_quote_' . $quote_id);
+    
+    global $wpdb;
+    $quotes_table = $wpdb->prefix . 'cpc_quotes';
+    $items_table = $wpdb->prefix . 'cpc_quote_items';
+    
+    // Delete items first
+    $wpdb->delete($items_table, array('quote_id' => $quote_id));
+    // Delete quote
+    $result = $wpdb->delete($quotes_table, array('id' => $quote_id));
+    
+    if ($result) {
+        echo '<div class="notice notice-success is-dismissible"><p>' . esc_html__('Quote deleted successfully.', 'cleaning-price-calculator') . '</p></div>';
+    } else {
+        echo '<div class="notice notice-error is-dismissible"><p>' . esc_html__('Failed to delete quote.', 'cleaning-price-calculator') . '</p></div>';
+    }
+}
+
 // Pagination settings
 $per_page = 20;
 $current_page = isset($_GET['paged']) ? max(1, intval($_GET['paged'])) : 1;
@@ -130,9 +151,16 @@ if (isset($_GET['error'])) {
                     </td>
                     <td data-colname="<?php esc_attr_e('Actions', 'cleaning-price-calculator'); ?>">
                         <a href="<?php echo esc_url(admin_url('admin.php?page=cpc-quotes&action=view&quote_id=' . $quote->id)); ?>" 
-                           class="button button-primary button-small">
+                        class="button button-primary button-small">
                             <span class="dashicons dashicons-visibility" style="margin-top: 3px;"></span>
                             <?php esc_html_e('View Details', 'cleaning-price-calculator'); ?>
+                        </a>
+                        <a href="<?php echo esc_url(wp_nonce_url(admin_url('admin.php?page=cpc-quotes&action=delete&quote_id=' . $quote->id), 'cpc_delete_quote_' . $quote->id)); ?>" 
+                        class="button button-small"
+                        style="color: #dc2626;"
+                        onclick="return confirm('<?php esc_attr_e('Are you sure you want to delete this quote?', 'cleaning-price-calculator'); ?>');">
+                            <span class="dashicons dashicons-trash" style="margin-top: 3px;"></span>
+                            <?php esc_html_e('Delete', 'cleaning-price-calculator'); ?>
                         </a>
                     </td>
                 </tr>

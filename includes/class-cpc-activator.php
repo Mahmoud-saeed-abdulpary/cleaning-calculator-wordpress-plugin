@@ -28,8 +28,15 @@ class CPC_Activator {
         // Flush rewrite rules
         flush_rewrite_rules();
         
-        // Clear the migration flag to ensure tables are updated
+        // Clear ALL migration flags to force fresh table creation
         delete_option('cpc_db_migration_done_v2');
+        delete_option('cpc_room_count_migration_done');
+
+        // Trigger room_count column migration
+        delete_option('cpc_room_count_migration_done');
+
+        // Log activation
+        error_log('CPC: Plugin activated - tables should be created');
     }
     
     /**

@@ -58,21 +58,24 @@ class CPC_Ajax {
         // Get fixed price from settings
         $fixed_price_per_sqm = floatval(get_option('cpc_fixed_price_per_sqm', '5.00'));
         
+        
         // Validate and prepare rooms data
         $validated_rooms = array();
         foreach ($rooms_data as $room) {
             $room_name = sanitize_text_field($room['room_name'] ?? '');
+            $room_count = intval($room['room_count'] ?? 1);
             $area = floatval($room['area'] ?? 0);
             
-            if (empty($room_name) || $area <= 0) {
-                error_log('CPC: Skipping invalid room - Name: ' . $room_name . ', Area: ' . $area);
+            if (empty($room_name) || $area <= 0 || $room_count <= 0) {
+                error_log('CPC: Skipping invalid room - Name: ' . $room_name . ', Count: ' . $room_count . ', Area: ' . $area);
                 continue;
             }
             
-            $subtotal = $area * $fixed_price_per_sqm;
+            $subtotal = $room_count * $area * $fixed_price_per_sqm;
             
             $validated_rooms[] = array(
                 'room_name' => $room_name,
+                'room_count' => $room_count,
                 'area' => $area,
                 'price_per_sqm' => $fixed_price_per_sqm,
                 'subtotal' => $subtotal,
@@ -118,27 +121,30 @@ class CPC_Ajax {
             $total += $room['subtotal'];
         }
         
+        
         // Build rooms table HTML
         $rooms_html = '<table style="width:100%; border-collapse: collapse; margin: 20px 0;">';
         $rooms_html .= '<thead><tr style="background:#f5f5f5;">';
         $rooms_html .= '<th style="padding:10px; border:1px solid #ddd;">' . __('Room Name', 'cleaning-price-calculator') . '</th>';
+        $rooms_html .= '<th style="padding:10px; border:1px solid #ddd;">' . __('Room Count', 'cleaning-price-calculator') . '</th>';
         $rooms_html .= '<th style="padding:10px; border:1px solid #ddd;">' . __('Area (m²)', 'cleaning-price-calculator') . '</th>';
         $rooms_html .= '<th style="padding:10px; border:1px solid #ddd;">' . __('Price/m²', 'cleaning-price-calculator') . '</th>';
         $rooms_html .= '<th style="padding:10px; border:1px solid #ddd;">' . __('Subtotal', 'cleaning-price-calculator') . '</th>';
         $rooms_html .= '</tr></thead><tbody>';
-        
+
         foreach ($rooms_data as $room) {
             $rooms_html .= '<tr>';
             $rooms_html .= '<td style="padding:10px; border:1px solid #ddd;">' . esc_html($room['room_name']) . '</td>';
+            $rooms_html .= '<td style="padding:10px; border:1px solid #ddd; text-align:center;">' . intval($room['room_count']) . '</td>';
             $rooms_html .= '<td style="padding:10px; border:1px solid #ddd;">' . number_format($room['area'], 2) . '</td>';
             $rooms_html .= '<td style="padding:10px; border:1px solid #ddd;">' . number_format($room['price_per_sqm'], 2) . ' ' . $currency . '</td>';
-            $rooms_html .= '<td style="padding:10px; border:1px solid #ddd;">' . number_format($room['subtotal'], 2) . ' ' . $currency . '</td>';
+            $rooms_html .= '<td style="padding:10px; border:1px solid #ddd;"><strong>' . number_format($room['subtotal'], 2) . ' ' . $currency . '</strong></td>';
             $rooms_html .= '</tr>';
         }
-        
+
         $rooms_html .= '</tbody></table>';
         $rooms_html .= '<p style="font-size:18px; font-weight:bold; text-align:right;">' . __('Total:', 'cleaning-price-calculator') . ' ' . number_format($total, 2) . ' ' . $currency . '</p>';
-        
+                
         // Configure SMTP if enabled
         $this->configure_smtp();
         

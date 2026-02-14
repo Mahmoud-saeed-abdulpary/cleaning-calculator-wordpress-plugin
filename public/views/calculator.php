@@ -124,8 +124,22 @@ $price_per_sqm = floatval(get_option('cpc_fixed_price_per_sqm', '5.00'));
                 </div>
                 
                 <div class="cpc-form-group">
-                    <label><?php echo esc_html__('Area', 'cleaning-price-calculator') . ' (m²)'; ?></label>
+                    <label><?php esc_html_e('Room Count', 'cleaning-price-calculator'); ?></label>
+                    <input type="number" class="cpc-room-count" name="room_count_{{index}}" step="1" min="1" value="1" placeholder="1" required>
+                </div>
+            </div>
+            
+            <div class="cpc-form-row">
+                <div class="cpc-form-group">
+                    <label><?php echo esc_html__('Area per Room', 'cleaning-price-calculator') . ' (m²)'; ?></label>
                     <input type="number" class="cpc-room-area" name="room_area_{{index}}" step="0.01" min="0.01" placeholder="0.00" required>
+                </div>
+                
+                <div class="cpc-form-group">
+                    <label><?php esc_html_e('Calculation', 'cleaning-price-calculator'); ?></label>
+                    <div class="cpc-calculation-display" style="padding: 12px; background: #f3f4f6; border-radius: 6px; font-size: 14px; color: #6b7280;">
+                        <span class="cpc-calc-formula">-</span>
+                    </div>
                 </div>
             </div>
             

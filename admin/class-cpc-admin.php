@@ -30,7 +30,10 @@ class CPC_Admin {
      * Register the stylesheets for the admin area
      */
     public function enqueue_styles() {
-        if ($this->is_plugin_page()) {
+        $screen = get_current_screen();
+        
+        // Load on all plugin pages
+        if ($screen && (strpos($screen->id, 'cleaning-price-calculator') !== false || strpos($screen->id, 'cpc-') !== false)) {
             wp_enqueue_style(
                 $this->plugin_name,
                 CPC_PLUGIN_URL . 'assets/css/admin.css',
